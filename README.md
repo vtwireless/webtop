@@ -21,3 +21,21 @@ See the example webtop at <a
   * *git push origin gh-pages*
   * The web page URL should be *http://vtwireless.github.io/webtop/webtop_test.html*
 
+## Development with a simple web server
+To install the webfs web server with it running as a service:
+  * *apt-get install webfs*
+  * *service disable webfs*
+  * *service stop webfs*
+
+Now you have *webfs* installed and are not running a service with it.  We
+can run a webfs server in the forground, with this directory as the root of
+the server, using port 9190,  and logging to the forground with:
+  * *webfsd -r . -F -p 9190 -L -*
+
+You can use your favorite browser on you local computer with the URL:
+*http://localhost:9190/webtop_test.html*
+and
+*http://HOSTADDRESS:9190/webtop_test.html*
+on a different computer, assuming you can access the computer as HOSTNAME.
+
+
