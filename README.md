@@ -5,8 +5,8 @@ Javascript, HTML5, CSS to make a simple desktop in a browser page
 ## Working example
 
 See webtop examples at <a
-    href="https://vtwireless.github.io/webtop/index.html"
-    >https://vtwireless.github.io/webtop/index.html</a>
+    href="https://vtwireless.github.io/webtop/"
+    >https://vtwireless.github.io/webtop/</a>
 
 ## GitHub Source
 
