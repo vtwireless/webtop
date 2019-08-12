@@ -4,9 +4,14 @@
     <meta charset="utf-8"/>
 
     <style type="text/css">
-body {
-    background-color:#C0D0E0;
-    margin: 20px;
+
+
+frame.browser {
+    background-color: #86BAE4;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 
 canvas.waterfall {
@@ -25,32 +30,45 @@ canvas.clock {
     margin: 0px;
 }
     </style>
-    <link rel='stylesheet' href='webtop.css'></link>
-    <script src='webtop.js'></script>
-    <script src='clock.js'></script>
+
+    <script src='require.js'></script>
     <script>
+
+// Test for example  url = http://foo.com/webtop_test.html?mobile
+//
+// where 'mobile' is the argument to this script
+// 
+let webtop_type = location.href.replace(/^.*\?/g, '');
+
+console.log('webtop_type=' + webtop_type);
+
+if(webtop_type === 'mobile')
+    webtop_type = 'webtop_mobile.js'
+else if(webtop_type === 'desktop')
+    webtop_type = 'webtop_desktop.js'
+else
+    // This will auto select between 'webtop_mobile.js' and
+    // 'webtop_desktop.js' depending on browser.
+    webtop_type = 'webtop.js';
+
+require(webtop_type);
+require('clock.js');
+
 
 onload = function() {
 
-    function WaterfallPlot() {
-
-        var canvas = document.createElement('canvas');
-        canvas.className = "waterfall";
-
-        this.getElement = function() {
-            return canvas;
-        };
-    }
-
-    for(i=1; i<3; ++i) {
-        var plot = new WaterfallPlot;
-        new WTApp('Waterfall Plot ' + i,
-            plot.getElement() /*child element*/ );
+    function Page(url) {
+        var iframe = document.createElement('iframe');
+        iframe.src = url;
+        new WTApp('Page: ' + url, iframe);
     }
 
     var clock = new Clock;
     new WTApp('Clock', clock.getElement());
     clock.run();
+
+    Page('http://vt.edu');
+    Page('.');
 };
 
     </script>
@@ -59,6 +77,9 @@ onload = function() {
     <title>Webtop Example</title>
 </head>
 <body>
+
+    <h5><a href="..">parent directory</a> <a href=".">current directory</a> <a href="index.html">index page</a></h5>
+
     <h1>Webtop</h1>
 
     <p>This is a simple web based desktop that
@@ -67,7 +88,7 @@ onload = function() {
     You can put regular HTML content under the "app" windows,
     like you see here.</p>
 
-    <p>We looked at other Web Desktops at <a
+    <p>Other Web Desktops at <a
            href="https://en.wikipedia.org/wiki/Web_desktop"
         >https://en.wikipedia.org/wiki/Web_desktop</a>.</p>
 
@@ -75,6 +96,8 @@ onload = function() {
         github at <a
            href="https://github.com/vtwireless/webtop"
         >https://github.com/vtwireless/webtop</a>.</p>
+
+    <h5><a href="..">parent directory</a> <a href=".">current directory</a> <a href="index.html">index page</a></h5>
 
 </body>
 </html>

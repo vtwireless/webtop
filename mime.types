@@ -1,0 +1,29 @@
+# mime types for running a test server
+#
+# Example:
+#
+#   webfsd -r . -F -p 9190 -L - -i localhost -m mime.types 
+#
+
+message/http
+message/s-http
+application/xhtml+xml				xhtml xht
+application/xml					xml xsd
+application/zip					zip
+image/gif					gif
+image/jpeg					jpeg jpg jpe
+image/png					png
+image/svg+xml					svg svgz
+image/tiff					tiff tif
+text/csv					csv
+text/html					html htm shtml
+text/markdown                                   md markdown
+text/plain					asc txt text pot brf srt
+text/x-c++hdr					h++ hpp hxx hh
+text/x-c++src					c++ cpp cxx cc
+video/mp4					mp4
+video/quicktime					qt mov
+video/ogg					ogv
+x-world/x-vrml					vrm vrml wrl
+application/javascript			        js mjs
+text/css                                        css

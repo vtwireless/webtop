@@ -2,7 +2,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations#An_animated_clock
 //
 //
-var ccount = 0;
 
 function Clock() {
   
@@ -143,4 +142,3 @@ function Clock() {
 
     this.run = run;
 }
-

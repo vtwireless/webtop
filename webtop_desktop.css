@@ -13,7 +13,6 @@ div.WTeventCatcher {
 }
 
 div.WTroot, body.WTroot {
-
     overflow: hidden;
     position: absolute;
     padding: 0px;
@@ -25,7 +24,6 @@ div.WTroot, body.WTroot {
 }
 
 div.WTwin {
-
     border-top-left-radius: 11px;
     border-top-right-radius: 11px;
     padding: 8px;
@@ -40,12 +38,10 @@ div.WTwin {
 }
 
 div.WTwin:focus {
-
     background-color: rgba(28,28,130,0.6);
 }
 
 div.WTmain {
-
     padding: 0px;
     margin: 0px;
     border: 0px;
@@ -55,7 +51,6 @@ div.WTmain {
 }
 
 div.WTheader {
-
     padding: 0px;
     margin: 0px;
     border: 0px;
@@ -66,7 +61,6 @@ div.WTheader {
 }
 
 div.WTheader_change {
-
     padding: 0px;
     margin: 0px;
     border: 0px;
