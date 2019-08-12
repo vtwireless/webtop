@@ -45,5 +45,5 @@ Add files:
   * *git add files*
   * *git commit -a -m "Adding pages"*
   * *git push origin gh-pages*
-  * The web page URL should be *http://vtwireless.github.io/webtop/webtop_test.html*
+  * The web page URL should be *http://vtwireless.github.io/webtop/*
 
