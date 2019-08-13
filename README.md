@@ -36,7 +36,7 @@ You can use your favorite browser on you local computer with the URL:
 ## Making github web pages
 
 We setup the web pages at URL
-https://vtwireless.github.io/webtop/webtop_test.html with:
+https://vtwireless.github.io/webtop/index.html with:
   * *git clone git@github.com:vtwireless/webtop.git webtop_pages*
   * *cd webtop_pages*
   * *git checkout --orphan gh-pages*
@@ -45,5 +45,4 @@ Add files:
   * *git add files*
   * *git commit -a -m "Adding pages"*
   * *git push origin gh-pages*
-  * The web page URL should be *http://vtwireless.github.io/webtop/*
 
