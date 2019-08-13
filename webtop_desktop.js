@@ -120,7 +120,7 @@ function WTApp(headerText, app, onclose = null, opts = null) {
     
     this.appIndex = root.totalApps++;
 
-    root.apps.push(this);
+    root.wtApps.push(this);
 
     app.style.padding = '0px';
     app.style.margin = '0px';
@@ -150,13 +150,13 @@ function WTApp(headerText, app, onclose = null, opts = null) {
         let i = This.appIndex;
         let zIndex = i + root.startingZIndex;
         for(++i;i<root.totalApps;++i) {
-            let app = root.apps[i];
+            let app = root.wtApps[i];
             app.win.style.zIndex = zIndex++;
-            root.apps[i-1] = app;
+            root.wtApps[i-1] = app;
             app.appIndex = i-1;
         }
         This.appIndex = i-1;
-        root.apps[This.appIndex] = This;
+        root.wtApps[This.appIndex] = This;
         win.style.zIndex = zIndex;
     }
 
@@ -167,6 +167,8 @@ function WTApp(headerText, app, onclose = null, opts = null) {
     win.style.top = (root.win.offsetHeight - win.offsetHeight)/2 + 'px';
 
     win.tabIndex = '0';
+
+    win.WTApp = app;
 
     // Prevent header and main from letting pointer down events to
     // the win.
@@ -457,6 +459,90 @@ function WTRoot(rootWin = null) {
 
     this.startingZIndex = 3;
     this.totalApps = 0;
-    this.apps = [];
+    this.wtApps = [];
+
+    function findFocusedApp() {
+
+        var el = document.activeElement;
+        // see if this el is a child of a win app thingy
+        for(; el; el = el.parentElement)
+            if(el.WTApp != null)
+                // This is returning the app that was passed to WTApp()
+                // which could be a <div>, <canvas>, <iframe>, or
+                // <whatever>.
+                return el.WTApp;
+        return document.documentElement;
+    }
+
+    var requestFullscreen = null;
+    
+    [
+        'requestFullscreen',
+        'webkitRequestFullscreen',
+        'mozRequestFullScreen',
+        'msRequestFullscreen'
+    ].forEach(function(rfs) {
+        if(!requestFullscreen && rootWin[rfs])
+            requestFullscreen = rfs;
+    });
+
+
+    function fullscreenElement() {
+        return (
+            document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.mozFullScreenElement ||
+            document.msFullscreenElement || null);
+    }
+
+    function toggleFullScreen() {
+
+        function exitFullscreen() {
+            if(document.exitFullscreen)
+	        document.exitFullscreen();
+	    else if(document.mozCancelFullScreen)
+	        document.mozCancelFullScreen();
+	    else if(document.webkitExitFullscreen)
+	        document.webkitExitFullscreen();
+	    else if(document.msExitFullscreen)
+	        document.msExitFullscreen();
+        }
+
+        // Returns true if this takes action.
+
+        let focusEl = findFocusedApp();
+        let fullEl = fullscreenElement()
+
+        //console.log('focused element=' + focusEl.outerHTML);
+
+        if(fullEl) {
+            if(focusEl !== fullEl) {
+                focusEl[requestFullscreen]();
+                return;
+            }
+            exitFullscreen();
+            return;
+        }
+        // else no fullscreen
+        focusEl[requestFullscreen]();
+    }
+
+
+    // Key bindings for this window manager thingy:
+    document.addEventListener("keypress", function(e) {
+
+        // TODO: Figure out other keys and mode keys like alt and control.
+        //
+        // firefox 65.0 does not let this code get key 'F11'
+        // it just goes fullscreen with the whole body.
+        //
+        //console.log("e.key=" + e.key);
+
+        if(e.key === 'F11' || e.key === '+') {
+            if(!e.repeat)
+                toggleFullScreen();
+                e.preventDefault();
+            }
+        });
 }
 

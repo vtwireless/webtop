@@ -153,38 +153,34 @@ function WTRoot(rootWin = null) {
         app.className = 'WTapp';
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    // BUG: TODO: This method of switching seems to cause an app that is a
+    // <ifame> to reload all it's content.
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 
     // Show the next app
     function goToNext() {
 
-        console.log('next app');
-
-        //assert(showingAppObj);
-
+        //console.log('next app');
         if(!showingAppObj.next) return;
 
         main.removeChild(main.firstChild);
         showingAppObj = showingAppObj.next;
-
-console.log('Switching to: ' + showingAppObj.app.outerHTML);
-
+        //console.log('Switching to: ' + showingAppObj.app.outerHTML);
         main.appendChild(showingAppObj.app);
     };
 
     // Show the prev app
     function goToPrev() {
 
-        console.log('prev app');
-
-        //assert(showingAppObj);
-
+        //console.log('prev app');
         if(!showingAppObj.prev) return;
 
         main.removeChild(main.firstChild);
         showingAppObj = showingAppObj.prev;
-
-console.log('Switching to: ' + showingAppObj.app.outerHTML);
-
+        //console.log('Switching to: ' + showingAppObj.app.outerHTML);
         main.appendChild(showingAppObj.app);
     };
 
