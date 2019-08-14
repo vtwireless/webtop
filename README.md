@@ -45,4 +45,3 @@ Add files:
   * *git add files*
   * *git commit -a -m "Adding pages"*
   * *git push origin gh-pages*
-
